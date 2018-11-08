@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EAB35BEA-9
 		docs\xliff.md = docs\xliff.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbLocalizationProvider.PerfTests", "Tests\DbLocalizationProvider.PerfTests\DbLocalizationProvider.PerfTests.csproj", "{DB6A1C7C-F2A3-4F28-B117-879FB1A684C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{0075E83B-79A1-4957-818C-CF9FDCAE80E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0075E83B-79A1-4957-818C-CF9FDCAE80E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0075E83B-79A1-4957-818C-CF9FDCAE80E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB6A1C7C-F2A3-4F28-B117-879FB1A684C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6A1C7C-F2A3-4F28-B117-879FB1A684C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB6A1C7C-F2A3-4F28-B117-879FB1A684C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB6A1C7C-F2A3-4F28-B117-879FB1A684C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0075E83B-79A1-4957-818C-CF9FDCAE80E5} = {DF259C87-9633-46AF-B6E5-AA44E34878AB}
 		{EAB35BEA-94DE-4894-ABC3-5F306C5995F6} = {C79C0F5F-7C56-42C8-84EB-31342C7609F7}
+		{DB6A1C7C-F2A3-4F28-B117-879FB1A684C7} = {DF259C87-9633-46AF-B6E5-AA44E34878AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3132F4CD-7EB0-41DD-B326-F4C39FF97FD0}
