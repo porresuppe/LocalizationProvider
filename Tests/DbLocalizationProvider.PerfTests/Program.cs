@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using DbLocalizationProvider.Internal;
 
@@ -8,7 +9,7 @@ namespace DbLocalizationProvider.PerfTests
     public class ExpressionHelperTests
     {
         [Benchmark]
-        public string GetTranslation() => ExpressionHelper.GetFullMemberName(() => SomeResource.Property1);
+        public string BuildResourceKey() => ExpressionHelper.GetFullMemberName(() => SomeResource.Property1);
     }
 
     public class SomeResource
@@ -20,7 +21,12 @@ namespace DbLocalizationProvider.PerfTests
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<ExpressionHelperTests>();
+            //var summary = BenchmarkRunner.Run<ExpressionHelperTests>();
+
+            var sut = new ExpressionHelperTests();
+            var result = sut.BuildResourceKey();
+
+            //Console.ReadLine();
         }
     }
 }
