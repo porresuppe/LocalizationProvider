@@ -30,7 +30,7 @@ namespace DbLocalizationProvider.Cache
         {
             if(ConfigurationContext.Current.Tenants.Any())
             {
-                return $"{CacheKeyPrefix}_{ConfigurationContext.Current.GetTenantName}_{key}";
+                return $"{CacheKeyPrefix}_{ConfigurationContext.Current.GetTenantName?.Invoke()}_{key}";
             }
             return $"{CacheKeyPrefix}_{key}";
         }
@@ -40,7 +40,7 @@ namespace DbLocalizationProvider.Cache
             var replaceThis = $"{CacheKeyPrefix}_";
             if(ConfigurationContext.Current.Tenants.Any())
             {
-                replaceThis = $"{replaceThis}{ConfigurationContext.Current.GetTenantName}_";
+                replaceThis = $"{replaceThis}{ConfigurationContext.Current.GetTenantName?.Invoke()}_";
             }
 
             return cacheKey.Replace(replaceThis, string.Empty);

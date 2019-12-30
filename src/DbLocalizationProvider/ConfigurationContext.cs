@@ -41,7 +41,8 @@ namespace DbLocalizationProvider
         public const string CultureForTranslationsFromCode = "";
 
         internal readonly BaseCacheManager BaseCacheManager = new BaseCacheManager(new InMemoryCache());
-        
+        internal string DbContextConnectionString;
+
         private ConfigurationContext()
         {
             ModelMetadataProviders = new ModelMetadataProvidersConfiguration();
@@ -96,6 +97,14 @@ namespace DbLocalizationProvider
         ///     <c>true</c> if cache should be populated; otherwise, <c>false</c>.
         /// </value>
         public bool PopulateCacheOnStartup { get; set; } = true;
+
+        /// <summary>
+        ///     Gets or sets the name of the database connection.
+        /// </summary>
+        /// <value>
+        ///     The name of the connection.
+        /// </value>
+        public string Connection { get; set; } = "DefaultConnection";
 
         /// <summary>
         /// Returns type factory used internally for creating new services or handlers for commands.
@@ -190,7 +199,9 @@ namespace DbLocalizationProvider
 
         public Tenant GetTenant()
         {
-            return Current.Tenants.FirstOrDefault(t => t.Name == GetTenantName());
+            return Current.Tenants.FirstOrDefault(t => t.Name == GetTenantName?.Invoke());
         }
+
+        public bool InitializeDatabase { get; set; }
     }
 }
