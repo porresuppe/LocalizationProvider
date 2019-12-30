@@ -73,7 +73,7 @@ namespace DbLocalizationProvider
         /// <remarks><see cref="CultureInfo.CurrentUICulture" /> is used as language.</remarks>
         public virtual string GetString(string resourceKey)
         {
-            return GetString(resourceKey, CultureInfo.CurrentUICulture);
+            return GetString(resourceKey, GetCurrentUiCulture());
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace DbLocalizationProvider
         /// <remarks><see cref="CultureInfo.CurrentUICulture" /> is used as language.</remarks>
         public virtual string GetString(Expression<Func<object>> resource, params object[] formatArguments)
         {
-            return GetStringByCulture(resource, CultureInfo.CurrentUICulture, formatArguments);
+            return GetStringByCulture(resource, GetCurrentUiCulture(), formatArguments);
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace DbLocalizationProvider
         /// <returns>Translated class based on <see cref="CultureInfo.CurrentUICulture"/> language</returns>
         public T Translate<T>()
         {
-            return Translate<T>(CultureInfo.CurrentUICulture);
+            return Translate<T>(GetCurrentUiCulture());
         }
 
         /// <summary>
@@ -239,6 +239,17 @@ namespace DbLocalizationProvider
             }
 
             return placeholderMap.Aggregate(message, (current, pair) => current.Replace(pair.Key, pair.Value.ToString()));
+        }
+
+        private static CultureInfo GetCurrentUiCulture()
+        {
+            var currentUiCulture = CultureInfo.CurrentUICulture;
+            if(ConfigurationContext.Current.Tenants.Any())
+            {
+                currentUiCulture = ConfigurationContext.Current.GetTenant().CultureInfo;
+            }
+
+            return currentUiCulture;
         }
     }
 }

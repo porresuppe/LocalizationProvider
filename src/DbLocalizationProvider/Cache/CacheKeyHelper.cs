@@ -18,6 +18,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
+using System.Linq;
+
 namespace DbLocalizationProvider.Cache
 {
     public class CacheKeyHelper
@@ -26,12 +28,22 @@ namespace DbLocalizationProvider.Cache
 
         public static string BuildKey(string key)
         {
+            if(ConfigurationContext.Current.Tenants.Any())
+            {
+                return $"{CacheKeyPrefix}_{ConfigurationContext.Current.GetTenantName}_{key}";
+            }
             return $"{CacheKeyPrefix}_{key}";
         }
 
         public static string GetResourceKeyFromCacheKey(string cacheKey)
         {
-            return cacheKey.Replace($"{CacheKeyPrefix}_", string.Empty);
+            var replaceThis = $"{CacheKeyPrefix}_";
+            if(ConfigurationContext.Current.Tenants.Any())
+            {
+                replaceThis = $"{replaceThis}{ConfigurationContext.Current.GetTenantName}_";
+            }
+
+            return cacheKey.Replace(replaceThis, string.Empty);
         }
     }
 }
